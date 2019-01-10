@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <title>FileExplorer</title>
+    <link href="css/mui.min.css" rel="stylesheet" />
+</head>
+
+<body class="mui-fullscreen">
+
+    <header class="mui-bar mui-bar-nav">
+        <a class="mui-icon mui-action-menu mui-icon-bars mui-pull-left" ontouchstart="_page.showPanel();"></a>
+        <h1 class="mui-title">标题</h1>
+    </header>
+
+    <script src="js/rem.js"></script>
+    <script src="./js/events.js"></script>
+    <script src="js/mui.min.js"></script>
+    <script src="index.js"></script>
+    <script type="text/javascript" charset="utf-8">
+        //  ontouchstart="mui.fire(plus.webview.getWebviewById('file_list'), Events.pathup, { test: '123' });"
+        mui.init({
+            subpages: [{
+                url: "./components/file_list.html",
+                id: "file_list",
+                styles: {
+                    top: "45px",
+                    bottom: "0px"
+                },
+                extras: {
+                    // 传入初始路径, 没有值表示默认路径
+                    path: null
+                }
+            }]
+        });
+        mui.plusReady(function () {
+            var panel = _page.panel = mui.preload({
+                id: "global_panel",
+                url: "./components/global_panel.html",
+                styles: {
+                    left: -document.documentElement.clientWidth * 0.4+"",
+                    width: document.documentElement.clientWidth * 0.4+"",
+                    zIndex: 999
+                }
+            });
+            plus.webview.currentWebview().addEventListener('maskClick', function() {
+                _page.hidePanel();
+            });
+        });
+    </script>
+</body>
+
+</html>
