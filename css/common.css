@@ -1,0 +1,19 @@
+@font-face {
+    font-family: 'wqy-zh';
+    src: url('../fonts/文泉驿正黑.ttf') format('opentype');
+}
+
+@font-face {
+    font-family: 'en-arual';
+    src: url('../fonts//Arual.ttf') format('opentype');
+}
+
+.font {
+    font-family: 'wqy-zh', 'en-arual';
+}
+
+body {
+    /* width: 100vw;
+    height: 100vh; */
+    position: relative;
+}
