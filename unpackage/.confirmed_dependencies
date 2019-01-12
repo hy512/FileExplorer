@@ -1,15 +1,15 @@
 {
-	"index.html": {
-		"href": "index.html",
-		"resources": [
-			"js/mui.min.js",
-			"css/mui.min.css",
-			"components/file_list.html"
-		],
-		"refer": [
-			"components/file_list.html",
-			"components/global_panel.html"
-		],
-		"priority": 0
-	}
+  "index.html": {
+    "href": "index.html",
+    "resources": [
+      "js/mui.min.js",
+      "css/mui.min.css",
+      "components/file_list.html"
+    ],
+    "refer": [
+      "components/file_list.html",
+      "components/global_panel.html"
+    ],
+    "priority": 0
+  }
 }

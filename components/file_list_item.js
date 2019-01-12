@@ -1,23 +1,27 @@
 var ListItem = {
-    props: ["icon", "name", "size", "modify", "path"],
+    props: ["icon", "name", "size", "modify", "path", "isDirectory"],
     data: function () {
         return {
             checked: false
         };
     },
     mounted: function () {
-        var hammer = new hammer(this.$refs.a, {});
+        var hammer = new Hammer(this.$refs.a, {});
         var self = this;
+        // 添加长按和点击事件
         hammer.on("press", function () {
             var checked = !self.checked;
             self.checked = checked;
             self.$emit("press", { checked: checked, path: self.path });
         });
+        hammer.on("tap", function () {
+            self.$emit("tap", { path: self.path });
+        });
     },
     computed: {
-        checkStyle: function() {
+        checkStyle: function () {
             if (this.checked) {
-                return {color: "blue"};
+                return { color: "blue" };
             }
             return {};
         }
@@ -25,7 +29,7 @@ var ListItem = {
     template: '<li class="mui-table-view-cell mui-media">' +
         '<a ref="a" href="javascript:;">' +
         '<div class="mui-media-object mui-pull-left">' +
-        '<span :class="[\"fa\", icon, \"fa-lg\"]"></span>' +
+        '<span :class="[\'fa\', icon, \'fa-lg\']"></span>' +
         '</div>' +
         '<div class="mui-media-object mui-pull-right">' +
         '<span :style="checkStyle" class="fa fa-circle"></span>' +

@@ -15,11 +15,13 @@
         <ul class="mui-table-view">
             <list-item v-for="item of list" 
                 @press="select"
+                @tap="goIn"
                 :key="item.path"
                 :icon="item.icon"
                 :name="item.name"
                 :size="item.size"
                 :modify="item.modify"
+                :is-directory="item.isDirectory"
                 :path="item.path" />
         </ul>
     </div>
