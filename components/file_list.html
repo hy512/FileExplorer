@@ -16,6 +16,7 @@
             <list-item v-for="item of list" 
                 @press="select"
                 @tap="goIn"
+                @xselect="select"
                 :key="item.path"
                 :icon="item.icon"
                 :name="item.name"
