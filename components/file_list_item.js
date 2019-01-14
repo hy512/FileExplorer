@@ -1,5 +1,5 @@
 var ListItem = {
-    props: ["icon", "name", "size", "modify", "path", "isDirectory", "pick"],
+    props: ["icon", "name", "size", "modify", "path", "isDirectory", "pickMode"],
     data: function () {
         return {
             checked: false
@@ -21,13 +21,18 @@ var ListItem = {
         itemMg.on("press", function () {
         });
         itemMg.on("tap", function () {
+            if (self.pickMode) {
+                var checked = !self.checked;
+                self.checked = checked;
+                self.$emit("xselect", { checked: checked, path: self.path });
+                return;
+            }
             self.$emit("tap", { path: self.path });
         });
-        multiSelectMg.on("tap", function (event) {
+        multiSelectMg.on("tap", function () {
             var checked = !self.checked;
             self.checked = checked;
             self.$emit("xselect", { checked: checked, path: self.path });
-            event.preventDefault();
         });
     },
     computed: {
