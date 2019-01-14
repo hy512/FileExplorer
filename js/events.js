@@ -12,5 +12,11 @@ Object.defineProperties(Events, {
         configurable: false,
         writable: false,
         value: "pathup"
+    },
+    updatepick: {
+        enumerable: true,
+        configurable: false,
+        writable: false,
+        value: "updatepick"
     }
 });

@@ -83,4 +83,17 @@
 
         show = false;
     }
+    page.onPicks = function (event) {
+        //获得事件参数
+        var picks = event.detail.picks;
+        if (!(picks instanceof Array)) return;
+        // 已经没有被选中的文件
+        // 隐藏选项栏, 否则显示
+        var webview = plus.webview.getWebviewById("file_list");
+        if (!picks.length) {
+            webview.setStyle({ bottom: "0px" });
+        } else {
+            webview.setStyle({ bottom: "50px" });
+        }
+    }
 })(window, document);

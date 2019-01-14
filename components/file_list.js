@@ -6,7 +6,8 @@ function initVue() {
         data: function () {
             return {
                 path: "",
-                list: []
+                list: [],
+                picks: []
             }
         },
         mounted: function () {
@@ -34,6 +35,10 @@ function initVue() {
                                 self.error(error);
                                 return;
                             }
+                            if (!success) {
+                                mui.alert("目录不存在 !");
+                                return;
+                            }
                             // 从新来过
                             plus.io.resolveLocalFileSystemURL("file://" + file.getAbsolutePath(), function (entry) {
                                 self.intoDirectory(entry);
@@ -43,7 +48,7 @@ function initVue() {
                 }, this.error);
             } else {
                 // 使用初始化参数提供的路径
-                plus.io.resolveLocalFileSystemURL("file://" + path, function (entry) {
+                plus.io.resolveLocalFileSystemURL("file://" + self.path, function (entry) {
                     self.intoDirectory(entry);
                 }, this.error);
             }
@@ -63,11 +68,20 @@ function initVue() {
             },
             // 选中元素
             select: function (event) {
-
-                console.log(event.checked + ", " + event.path);
+                var picks = this.picks;
+                if (event.checked) {
+                    picks.push(event.path);
+                } else {
+                    picks = this.picks.filter(function (value) {
+                        return value !== event.path;
+                    });
+                    this.picks = picks;
+                }
+                mui.fire(plus.webview.getLaunchWebview(), Events.updatepick, { picks: picks });
             },
             error: function (e) {
                 console.log([e.name, e.message, e.stack].join("\n"));
+                // console.log(arguments.callee.caller.name + arguments.callee.caller);
             },
             // 进入一个目录
             intoDirectory: function (entry) {
@@ -118,7 +132,7 @@ function initVue() {
                     .readEntries(function (children) {
                         if (!children.length) return;
                         // 读取所有文件条目
-                        var fileList = children.filter(function(value, index) {
+                        var fileList = children.filter(function (value, index) {
                             if (value === null || value === undefined) return false;
                             return true;
                         }).map(function (v, i) {
@@ -151,7 +165,7 @@ function initVue() {
                             value.entry.getMetadata(function (meta) {
                                 value.modify = meta.modificationTime.toISOString();
                                 if (!value.isDirectory) value.size = meta.size;
-                                that.list.splice(index+2, 1, value);
+                                that.list.splice(index + 2, 1, value);
                             }, that.error);
                         });
                     }, that.error);

@@ -18,6 +18,7 @@
                 @tap="goIn"
                 @xselect="select"
                 :key="item.path"
+                :pick="picks.length > 0"
                 :icon="item.icon"
                 :name="item.name"
                 :size="item.size"

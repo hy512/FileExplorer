@@ -6,15 +6,45 @@
     <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
     <title>FileExplorer</title>
     <link href="css/mui.min.css" rel="stylesheet" />
+    <link href="./libs/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+    <style type="text/css">
+        .mui-bar-tab .mui-tab-item {
+            color: deepskyblue !important;
+        }
+
+        .mui-bar-tab .mui-tab-item.disabled {
+            color: grey !important;
+        }
+    </style>
 </head>
 
 <body class="mui-fullscreen">
 
     <header class="mui-bar mui-bar-nav">
         <a class="mui-icon mui-action-menu mui-icon-bars mui-pull-left" ontouchstart="_page.showPanel();"></a>
-        <h1 class="mui-title">标题</h1>
+        <h1 class="mui-title">FileExplorer</h1>
     </header>
-
+    <div class="mui-bar mui-bar-tab">
+        <a id="copy" class="mui-tab-item mui-active" href="javascript:;">
+            <span class="fa fa-copy"></span>
+            <span class="mui-tab-label">copy</span>
+        </a>
+        <a id="cut" class="mui-tab-item" href="javascript:;">
+            <span class="fa fa-cut"></span>
+            <span class="mui-tab-label">cut</span>
+        </a>
+        <a id="paste" class="mui-tab-item" href="javascript:;">
+            <span class="fa fa-paste"></span>
+            <span class="mui-tab-label">paste</span>
+        </a>
+        <a id="delete" class="mui-tab-item" href="javascript:;">
+            <span class="fa fa-trash"></span>
+            <span class="mui-tab-label">delete</span>
+        </a>
+    </div>
+    <div class="mui-content">
+        <!-- 空内容 -->
+    </div>
     <script src="js/rem.js"></script>
     <script src="./js/events.js"></script>
     <script src="js/mui.min.js"></script>
@@ -31,7 +61,7 @@
                 },
                 extras: {
                     // 传入初始路径, 没有值表示默认路径
-                    path: null
+                    path: "/sdcard/"
                 }
             }]
         });
@@ -40,14 +70,16 @@
                 id: "global_panel",
                 url: "./components/global_panel.html",
                 styles: {
-                    left: -document.documentElement.clientWidth * 0.4+"",
-                    width: document.documentElement.clientWidth * 0.4+"",
+                    left: -document.documentElement.clientWidth * 0.4 + "",
+                    width: document.documentElement.clientWidth * 0.4 + "",
                     zIndex: 999
                 }
             });
-            plus.webview.currentWebview().addEventListener('maskClick', function() {
+            plus.webview.currentWebview().addEventListener('maskClick', function () {
                 _page.hidePanel();
             });
+            // 选中文件的事件
+            window.addEventListener(Events.updatepick, _page.onPicks);
         });
     </script>
 </body>

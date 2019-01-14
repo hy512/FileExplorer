@@ -1,21 +1,29 @@
 var ListItem = {
-    props: ["icon", "name", "size", "modify", "path", "isDirectory"],
+    props: ["icon", "name", "size", "modify", "path", "isDirectory", "pick"],
     data: function () {
         return {
             checked: false
         };
     },
     mounted: function () {
-        var hammer = new Hammer(this.$refs.a, {});
         var self = this;
+
+        var itemMg = new Hammer(this.$refs.a, {});
+        var multiSelectMg = new Hammer(this.$refs.multiSelect, {});
+
+        var clickItem = new Hammer.Tap();
+        var clickSelect = new Hammer.Tap();
+        clickItem.requireFailure(clickSelect);
+
+        itemMg.add(clickItem);
+        multiSelectMg.add(clickSelect);
         // 添加长按和点击事件
-        hammer.on("press", function () {
+        itemMg.on("press", function () {
         });
-        hammer.on("tap", function () {
+        itemMg.on("tap", function () {
             self.$emit("tap", { path: self.path });
         });
-        var multiSelect = new Hammer(this.$refs.multiSelect, {});
-        multiSelect.on("tap", function(event) {
+        multiSelectMg.on("tap", function (event) {
             var checked = !self.checked;
             self.checked = checked;
             self.$emit("xselect", { checked: checked, path: self.path });
