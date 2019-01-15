@@ -22,7 +22,7 @@ function initVue() {
                     // 判断是否存在目录再操作
                     file.exists(function (error, exists) {
                         if (error) {
-                            self.error(error);
+                            self.onError(error);
                             return;
                         }
                         if (exists) {
@@ -32,7 +32,7 @@ function initVue() {
                         // 创建目录
                         file.mkdirs(function (error, success) {
                             if (error) {
-                                self.error(error);
+                                self.onError(error);
                                 return;
                             }
                             if (!success) {
@@ -42,30 +42,43 @@ function initVue() {
                             // 从新来过
                             plus.io.resolveLocalFileSystemURL("file://" + file.getAbsolutePath(), function (entry) {
                                 self.intoDirectory(entry);
-                            }, this.error);
+                            }, this.onError);
                         });
                     });
-                }, this.error);
+                }, this.onError);
             } else {
                 // 使用初始化参数提供的路径
                 plus.io.resolveLocalFileSystemURL("file://" + self.path, function (entry) {
                     self.intoDirectory(entry);
-                }, this.error);
+                }, this.onError);
             }
 
             // 点击左上角返回按钮到上级目录
             window.addEventListener(Events.pathup, this.goOut);
+            // 刷新文件列表
+            window.addEventListener(Events.refresh, function () {
+                plus.io.resolveLocalFileSystemURL("file://" + self.path, function (entry) {
+                    self.intoDirectory(entry);
+                }, function (error) {
+                    self.onError(error);
+                });
+            });
+            window.addEventListener(Events.paste, function (event) {
+                self.onPaste(event.detail.type, event.detail.files);
+            });
         },
         methods: {
             // 退出目录
             goOut: function (event) {
             },
+
             goIn: function (event) {
                 var self = this;
                 plus.io.resolveLocalFileSystemURL("file://" + event.path, function (entry) {
                     self.intoDirectory(entry);
-                }, this.error);
+                }, this.onError);
             },
+
             // 选中元素
             select: function (event) {
                 var picks = this.picks;
@@ -79,14 +92,82 @@ function initVue() {
                 }
                 mui.fire(plus.webview.getLaunchWebview(), Events.updatepick, { picks: picks });
             },
-            error: function (e) {
+
+            onError: function (e) {
                 console.log([e.name, e.message, e.stack].join("\n"));
                 // console.log(arguments.callee.caller.name + arguments.callee.caller);
+            },
+
+            onPaste: function (type, files) {
+                if (!(files instanceof Array) || !files.length) {
+                    mui.toast("操作失败! 未选中任何文件.");
+                    return;
+                }
+
+                // 处理函数
+                var process = null;
+                var onFailure = function (error) {
+                    result[1]++;
+                    mui.toast([error.name, error.message, error.stack].join(", "));
+                    if (result[0] + result[1] === files.length) {
+                        mui.toast("操作完毕! 成功: " + result[0] + " 失败: " + result[1]);
+                        self.intoDirectory(parent);
+                        mui.fire(plus.webview.getLaunchWebview(), Events.updatepick, { picks: [] });
+
+                    }
+                }
+                var onSuccess = function (entry) {
+                    result[0]++;
+                    if (result[0] + result[1] === files.length) {
+                        mui.toast("操作完毕! 成功: " + result[0] + " 失败: " + result[1]);
+                        self.intoDirectory(parent);
+                        mui.fire(plus.webview.getLaunchWebview(), Events.updatepick, { picks: [] });
+
+                    }
+                }
+                switch (type) {
+                    case "copy":
+                    case "cut":
+                        process = function (entry) {
+                            // 解析文件名
+                            var name = /([^/]+)\/?$/.exec(entry.fullPath)[1];
+                            if (typeof name !== "string" || !/^\S.*\S$/.test(name)) {
+                                mui.toast("文件名错误: " + name);
+                                result[1]++;
+                                return;
+                            }
+                            switch (type) {
+                                case "copy":
+                                    entry.copyTo(parent, name, onSuccess, onFailure);
+                                    break;
+                                case "cut":
+                                    console.log(entry.fullPath + ", " + parent.fullPath + ", " + name);
+                                    entry.moveTo(parent, name, onSuccess, onFailure);
+                                    break;
+                            };
+                        };
+                        break;
+                    default:
+                        mui.toast("操作失败! type: " + type);
+                        return;
+                }
+                var self = this;
+                // 当前目录对象
+                var parent = this.list[0].entry;
+                // 成功和失败数量
+                var result = [0, 0];
+                // 开始复制文件
+                for (var i = files.length - 1; i >= 0; i--) {
+                    plus.io.resolveLocalFileSystemURL("file://" + files[i], process, onFailure);
+                }
             },
             // 进入一个目录
             intoDirectory: function (entry) {
                 console.log("into: " + entry.fullPath)
                 if (!entry.isDirectory) return;
+                // 清除选中内容
+                this.picks = [];
+
                 this.path = entry.fullPath;
                 var that = this;
                 this.list = [];
@@ -107,7 +188,7 @@ function initVue() {
                     var dir = that.list[0];
                     dir.modify = meta.modificationTime.toISOString();
                     that.list.splice(0, 1, dir);
-                }, that.error, false);
+                }, that.onError, false);
 
                 // 获取父目录信息
                 entry.getParent(function (entry) {
@@ -125,8 +206,8 @@ function initVue() {
                         var dir = that.list[1];
                         dir.modify = meta.modificationTime.toISOString();
                         that.list.splice(1, 1, dir);
-                    }, that.error);
-                }, that.error);
+                    }, that.onError);
+                }, that.onError);
                 // 读取目录项目
                 entry.createReader()
                     .readEntries(function (children) {
@@ -166,9 +247,9 @@ function initVue() {
                                 value.modify = meta.modificationTime.toISOString();
                                 if (!value.isDirectory) value.size = meta.size;
                                 that.list.splice(index + 2, 1, value);
-                            }, that.error);
+                            }, that.onError);
                         });
-                    }, that.error);
+                    }, that.onError);
             }
         },
         components: {

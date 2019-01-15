@@ -22,7 +22,7 @@
 
     <header class="mui-bar mui-bar-nav">
         <a class="mui-icon mui-action-menu mui-icon-bars mui-pull-left" ontouchstart="_page.showPanel();"></a>
-        <a class="mui-icon mui-action-menu mui-icon-bars mui-pull-right"></a>
+        <!-- <a class="mui-icon mui-action-menu mui-icon-bars mui-pull-right"></a> -->
 
         <h1 class="mui-title">FileExplorer</h1>
     </header>
@@ -82,6 +82,10 @@
             });
             // 选中文件的事件
             window.addEventListener(Events.updatepick, _page.onPicks);
+            document.body.querySelector("#delete").addEventListener("touchstart", _page.onDelete);
+            document.body.querySelector("#cut").addEventListener("touchstart", _page.onCopy);
+            document.body.querySelector("#copy").addEventListener("touchstart", _page.onCopy);
+            document.body.querySelector("#paste").addEventListener("touchstart", _page.onPaste);
         });
     </script>
 </body>

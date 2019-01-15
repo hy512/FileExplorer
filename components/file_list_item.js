@@ -54,8 +54,8 @@ var ListItem = {
         '<div class="mui-media-body">' +
         '{{name}}' +
         '<div class="mui-row">' +
-        '<div class="mui-col-xs-8" style="padding-left: 10px;">{{modify}}</div>' +
-        '<div class="mui-col-xs-4" style="padding-left: 10px;">{{size}}</div>' +
+        '<div class="mui-col-xs-8" style="padding-left: 10px; font-size: 12px;">{{modify}}</div>' +
+        '<div class="mui-col-xs-4" style="padding-left: 10px; font-size: 12px;">{{size}}</div>' +
         '</div>' +
         // "<p class='mui-ellipsis'></p>" +
         "</div>" +
