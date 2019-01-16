@@ -66,6 +66,9 @@ function initVue() {
             window.addEventListener(Events.paste, function (event) {
                 self.onPaste(event.detail.type, event.detail.files);
             });
+            window.addEventListener(Events.new, function (event) {
+                self.showNewOption();
+            });
         },
         methods: {
             // 退出目录
@@ -161,6 +164,48 @@ function initVue() {
                     plus.io.resolveLocalFileSystemURL("file://" + files[i], process, onFailure);
                 }
             },
+            // 新建
+            onNew: function (type, file) {
+                var method = type !== "file" ? "getDirectory" : "getFile";
+                var self = this;
+                var parent = this.list[0].entry;
+                var path = parent.fullPath;
+                if (!/\/$/.test(path)) {
+                    path = path + "/";
+                }
+                console.log(this.list[0].entry.fullPath + "  " + method + "  " +file);
+
+                parent[method](file, { create: true, exclusive: true },
+                    function (entry) {
+                        mui.toast("创建成功 !");
+                        console.log("创建成功: " +entry.fullPath);
+                    }, function (error) {
+                        mui.toast("创建失败 !");
+                        self.onError(error);
+                    });
+            },
+            // 显示新建表项
+            showNewOption: function () {
+                mui("#new-options").popover("toggle", document.body.querySelector("#new"));
+            },
+
+            inputNewName: function (event) {
+                var type = event.target.getAttribute("x-new-type");
+                var self = this;
+                mui.prompt(" ", "", "新建", ["确认", "取消"], function (input) {
+                    if (["file", "folder"].indexOf(type) < 0 || !input || typeof input.message !== "string") {
+                        mui.toast("未知选项 - type: " + type + ", input: " + JSON.stringify(input));
+                        return;
+                    }
+                    var name = input.message.trim();
+                    if (!name.length) {
+                        mui.toast("无效的文件名 !");
+                        return;
+                    }
+                    self.onNew(type, name);
+                });
+            },
+
             // 进入一个目录
             intoDirectory: function (entry) {
                 console.log("into: " + entry.fullPath)

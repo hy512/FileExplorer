@@ -4,12 +4,43 @@
     "resources": [
       "js/mui.min.js",
       "css/mui.min.css",
-      "components/file_list.html"
+      "components/file_list.html",
+      "libs/font-awesome/css/font-awesome.min.css",
+      "js/rem.js",
+      "js/events.js",
+      "index.js"
     ],
     "refer": [
       "components/file_list.html",
       "components/global_panel.html"
     ],
+    "priority": 0
+  },
+  "components/file_list.html": {
+    "href": "components/file_list.html",
+    "resources": [
+      "css/mui.min.css",
+      "libs/font-awesome/css/font-awesome.min.css",
+      "js/rem.js",
+      "js/events.js",
+      "js/mui.min.js",
+      "libs/vue_v2.5.21.js",
+      "libs/hammer.min.v2.0.8.js",
+      "js/File.js",
+      "components/file_list_item.js",
+      "components/file_list.js"
+    ],
+    "refer": [],
+    "priority": 0
+  },
+  "components/global_panel.html": {
+    "href": "components/global_panel.html",
+    "resources": [
+      "js/rem.js",
+      "js/events.js",
+      "js/mui.min.js"
+    ],
+    "refer": [],
     "priority": 0
   }
 }

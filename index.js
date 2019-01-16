@@ -200,4 +200,7 @@
         // 发送事件
         mui.fire(plus.webview.getWebviewById("file_list"), Events.paste, { type: page.copies.type, files: page.copies });
     }
+    page.onNew = function() {
+        mui.fire(plus.webview.getWebviewById("file_list"), Events.new);
+    }
 })(window, document);

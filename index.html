@@ -22,8 +22,7 @@
 
     <header class="mui-bar mui-bar-nav">
         <a class="mui-icon mui-action-menu mui-icon-bars mui-pull-left" ontouchstart="_page.showPanel();"></a>
-        <!-- <a class="mui-icon mui-action-menu mui-icon-bars mui-pull-right"></a> -->
-
+        <a id="new" class="mui-icon mui-action-menu mui-pull-right" style="font-size: 16px;">New</a>
         <h1 class="mui-title">FileExplorer</h1>
     </header>
     <div class="mui-bar mui-bar-tab">
@@ -86,6 +85,7 @@
             document.body.querySelector("#cut").addEventListener("touchstart", _page.onCopy);
             document.body.querySelector("#copy").addEventListener("touchstart", _page.onCopy);
             document.body.querySelector("#paste").addEventListener("touchstart", _page.onPaste);
+            document.body.querySelector("#new").addEventListener("touchstart", _page.onNew);
         });
     </script>
 </body>

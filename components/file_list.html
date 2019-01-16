@@ -11,22 +11,28 @@
 </head>
 
 <body>
-    <div class="mui-content">
+    <!-- <div style="display: none;"> -->
+    <a id="new" class="mui-icon mui-action-menu mui-pull-right" style="display: block;overflow: hidden; font-size: 16px;float: right; width: 0; height: 0;">New</a>
+    <!-- </div> -->
+    <div class="mui-content" style="clear: both;">
         <ul class="mui-table-view">
-            <list-item v-for="item of list" 
-                @press="select"
-                @tap="goIn"
-                @xselect="select"
-                :key="item.path"
-                :pick-mode="picks.length > 0"
-                :icon="item.icon"
-                :name="item.name"
-                :size="item.size"
-                :modify="item.modify"
-                :is-directory="item.isDirectory"
+            <list-item v-for="item of list" @press="select" @tap="goIn" @xselect="select" :key="item.path" :pick-mode="picks.length > 0"
+                :icon="item.icon" :name="item.name" :size="item.size" :modify="item.modify" :is-directory="item.isDirectory"
                 :path="item.path" />
         </ul>
+        <div id="new-options" class="mui-popover">
+            <ul class="mui-table-view">
+                <li class="mui-table-view-cell"><a href="javascript:;" x-new-type="file" @touchstart="inputNewName">文件</a></li>
+                <li class="mui-table-view-cell"><a href="javascript:;" x-new-type="folder" @touchstart="inputNewName">文件夹</a></li>
+            </ul>
+        </div>
     </div>
+    <!-- <div id="new-options" class="mui-popover">
+        <ul class="mui-table-view">
+            <li class="mui-table-view-cell"><a href="javascript:;" x-new-type="file" ontouchstart="inputNewName(event);">文件</a></li>
+            <li class="mui-table-view-cell"><a href="javascript:;" x-new-type="folder" ontouchstart="inputNewName.call(null, arguments);">文件夹</a></li>
+        </ul>
+    </div> -->
 
     <script src="../js/rem.js"></script>
     <script src="../js/events.js"></script>
@@ -36,7 +42,7 @@
     <script src="../js/File.js"></script>
     <script src="./file_list_item.js"></script>
     <script src="./file_list.js"></script>
-    
+
     <script type="text/javascript">
         mui.init();
         mui.plusReady(function () {

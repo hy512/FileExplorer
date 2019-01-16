@@ -1,147 +1,296 @@
 {
-	"@platforms": ["android", "iPhone", "iPad"],
-	"id": "H5E9E97F6",/*应用的标识，创建应用时自动生成，勿手动修改*/
-	"name": "MyFileExplorer",/*应用名称，程序桌面图标名称*/
-	"version": {
-		"name": "1.0.0",/*应用版本名称*/
-		"code": "83"
-	},
-	"description": "",/*应用描述信息*/
-	"icons": {
-		"72": "icon.png"
-	},
-	"launch_path": "index.html",/*应用的入口页面，默认为根目录下的index.html；支持网络地址，必须以http://或https://开头*/
+	"@wap2app_dev": false,
+	"description": "",
 	"developer": {
-		"name": "",/*开发者名称*/
-		"email": "",/*开发者邮箱地址*/
-		"url": "http://www.dcloud.io"
+		"email": "",
+		"name": "",
+		"url": "http:\/\/www.dcloud.io"
 	},
+	"fullscreen": false,
+	"icons": {
+		"48": ""
+	},
+	"id": "H5E9E97F6",
+	"launch_path": "index.html",
+	"license": {
+		"description": "",
+		"url": ""
+	},
+	"name": "MyFileExplorer",
 	"permissions": {
-        "Cache": {
-            "description": "管理应用缓存"
-        },
-        "Console": {
-            "description": "跟踪调试输出日志"
-        },
-        "Contacts": {
-            "description": "访问系统联系人信息"
-        },
-        "Events": {
-            "description": "应用扩展事件"
-        },
-        
-        "Maps": {
-            "description": "管理地图插件"
-        }
+		"Events": {
+		}
 	},
 	"plus": {
-		"splashscreen": {
-			"autoclose": true,/*是否自动关闭程序启动界面，true表示应用加载应用入口页面后自动关闭；false则需调plus.navigator.closeSplashscreen()关闭*/
-			"waiting": true
-		},
-		"runmode": "liberate",/*应用的首次启动运行模式，可取liberate或normal，liberate模式在第一次启动时将解压应用资源（Android平台File API才可正常访问_www目录）*/
-		"signature": "Sk9JTiBVUyBtYWlsdG86aHIyMDEzQGRjbG91ZC5pbw==",/*可选，保留给应用签名，暂不使用*/
 		"distribute": {
 			"apple": {
-				"appid": "",/*iOS应用标识，苹果开发网站申请的appid，如io.dcloud.HelloH5*/
-				"mobileprovision": "",/*iOS应用打包配置文件*/
-				"password": "",/*iOS应用打包个人证书导入密码*/
-				"p12": "",/*iOS应用打包个人证书，打包配置文件关联的个人证书*/
-				"devices": "universal",/*iOS应用支持的设备类型，可取值iphone/ipad/universal*/
-				"frameworks": []
+				"appid": "",
+				"devices": "universal",
+				"frameworks": [
+				],
+				"mobileprovision": "",
+				"p12": "",
+				"password": "",
+				"urltypes": [
+				]
 			},
+			"debug": false,
 			"google": {
-				"packagename": "",/*Android应用包名，如io.dcloud.HelloH5*/
-				"keystore": "",/*Android应用打包使用的密钥库文件*/
-				"password": "",/*Android应用打包使用密钥库中证书的密码*/
-				"aliasname": "",/*Android应用打包使用密钥库中证书的别名*/
-				"permissions": ["<uses-permission android:name=\"android.permission.GET_ACCOUNTS\"/>","<uses-permission android:name=\"com.android.launcher.permission.INSTALL_SHORTCUT\"/>","<uses-permission android:name=\"android.permission.MODIFY_AUDIO_SETTINGS\"/>","<uses-permission android:name=\"android.permission.MOUNT_UNMOUNT_FILESYSTEMS\"/>","<uses-permission android:name=\"android.permission.READ_CONTACTS\"/>","<uses-permission android:name=\"android.permission.CHANGE_WIFI_STATE\"/>","<uses-permission android:name=\"android.permission.READ_PHONE_STATE\"/>","<uses-permission android:name=\"android.permission.VIBRATE\"/>","<uses-permission android:name=\"android.permission.READ_LOGS\"/>","<uses-permission android:name=\"android.permission.WAKE_LOCK\"/>","<uses-permission android:name=\"android.permission.CALL_PHONE\"/>","<uses-permission android:name=\"android.permission.FLASHLIGHT\"/>","<uses-permission android:name=\"android.permission.ACCESS_WIFI_STATE\"/>","<uses-permission android:name=\"android.permission.ACCESS_COARSE_LOCATION\"/>","<uses-feature android:name=\"android.hardware.camera.autofocus\"/>","<uses-permission android:name=\"android.permission.WRITE_CONTACTS\"/>","<uses-feature android:name=\"android.hardware.camera\"/>","<uses-permission android:name=\"android.permission.ACCESS_FINE_LOCATION\"/>","<uses-permission android:name=\"android.permission.WRITE_EXTERNAL_STORAGE\"/>","<uses-permission android:name=\"android.permission.READ_EXTERNAL_STORAGE\"/>","<uses-permission android:name=\"android.permission.ACCESS_NETWORK_STATE\"/>","<uses-permission android:name=\"android.permission.WRITE_SETTINGS\"/>","<uses-permission android:name=\"com.android.launcher.permission.UNINSTALL_SHORTCUT\"/>","<uses-permission android:name=\"android.permission.CAMERA\"/>"]
+				"aliasname": "",
+				"keystore": "",
+				"packagename": "",
+				"password": "",
+				"permissions": [
+					"<uses-feature android:name=\"android.hardware.camera.autofocus\"\/>",
+					"<uses-feature android:name=\"android.hardware.camera\"\/>",
+					"<uses-permission android:name=\"android.permission.MODIFY_AUDIO_SETTINGS\"\/>",
+					"<uses-permission android:name=\"com.android.launcher.permission.INSTALL_SHORTCUT\"\/>",
+					"<uses-permission android:name=\"android.permission.WRITE_EXTERNAL_STORAGE\"\/>",
+					"<uses-permission android:name=\"android.permission.READ_EXTERNAL_STORAGE\"\/>",
+					"<uses-permission android:name=\"android.permission.VIBRATE\"\/>",
+					"<uses-permission android:name=\"android.permission.WAKE_LOCK\"\/>",
+					"<uses-permission android:name=\"android.permission.FLASHLIGHT\"\/>",
+					"<uses-permission android:name=\"android.permission.CALL_PHONE\"\/>",
+					"<uses-permission android:name=\"com.android.launcher.permission.UNINSTALL_SHORTCUT\"\/>",
+					"<uses-permission android:name=\"android.permission.CAMERA\"\/>"
+				]
 			},
-			"orientation": ["portrait-primary", "portrait-secondary"],/*应用支持的方向，portrait-primary：竖屏正方向；portrait-secondary：竖屏反方向；landscape-primary：横屏正方向；landscape-secondary：横屏反方向*/
 			"icons": {
-				"ios": {
-					"prerendered": true, /*应用图标是否已经高亮处理，在iOS6及以下设备上有效*/
-					"auto": "", /*应用图标，分辨率：512x512，用于自动生成各种尺寸程序图标*/
-					"iphone": {
-						"normal": "",/*iPhone普通屏幕程序图标，分辨率：57x57*/
-						"retina": "",/*iPhone高分屏程序图标，分辨率：114x114*/
-						"retina7": "",/*iPhone iOS7高分屏程序图标，分辨率：120x120*/
-						"spotlight-normal": "", /*iPhone Spotlight搜索程序图标，分辨率：29x29*/
-						"spotlight-retina": "", /*iPhone高分屏Spotlight搜索程序图标，分辨率：58x58*/
-						"spotlight-retina7": "",/*iPhone iOS7高分屏Spotlight搜索程序图标，分辨率：80x80*/
-						"settings-normal": "", /*iPhone设置页面程序图标，分辨率：29x29*/
-						"settings-retina": ""
-					},
-					"ipad": {
-						"normal": "", /*iPad普通屏幕程序图标，分辨率：72x72*/
-						"retina": "", /*iPad高分屏程序图标，分辨率：144x144*/
-						"normal7": "", /*iPad iOS7程序图标，分辨率：76x76*/
-						"retina7": "", /*iPad iOS7高分屏程序图标，分辨率：152x152*/
-						"spotlight-normal": "", /*iPad Spotlight搜索程序图标，分辨率：50x50*/
-						"spotlight-retina": "", /*iPad高分屏Spotlight搜索程序图标，分辨率：100x100*/
-						"spotlight-normal7": "",/*iPad iOS7 Spotlight搜索程序图标，分辨率：40x40*/
-						"spotlight-retina7": "",/*iPad iOS7高分屏Spotlight搜索程序图标，分辨率：80x80*/
-						"settings-normal": "",/*iPad设置页面程序图标，分辨率：29x29*/
-						"settings-retina": ""
-					}
-				},
 				"android": {
-					"mdpi": "", /*普通屏程序图标，分辨率：48x48*/
-					"ldpi": "", /*大屏程序图标，分辨率：48x48*/
-					"hdpi": "", /*高分屏程序图标，分辨率：72x72*/
-					"xhdpi": "",/*720P高分屏程序图标，分辨率：96x96*/
-					"xxhdpi": ""
+					"hdpi": "",
+					"ldpi": "",
+					"mdpi": "",
+					"xhdpi": "",
+					"xxhdpi": "",
+					"xxxhdpi": ""
+				},
+				"ios": {
+					"appstore": "",
+					"ipad": {
+						"app": "",
+						"app@2x": "",
+						"notification": "",
+						"notification@2x": "",
+						"proapp@2x": "",
+						"settings": "",
+						"settings@2x": "",
+						"spotlight": "",
+						"spotlight@2x": ""
+					},
+					"iphone": {
+						"app@2x": "",
+						"app@3x": "",
+						"notification@2x": "",
+						"notification@3x": "",
+						"settings@2x": "",
+						"settings@3x": "",
+						"spotlight@2x": "",
+						"spotlight@3x": ""
+					},
+					"prerendered": "true"
 				}
 			},
+			"orientation": [
+				"portrait-primary",
+				"portrait-secondary"
+			],
 			"splashscreen": {
-				"ios": {
-					"iphone": {
-						"default": "", /*iPhone3启动图片选，分辨率：320x480*/
-						"retina35": "",/*3.5英寸设备(iPhone4)启动图片，分辨率：640x960*/
-						"retina40": ""
-					},
-					"ipad": {
-						"portrait": "", /*iPad竖屏启动图片，分辨率：768x1004*/
-						"portrait-retina": "",/*iPad高分屏竖屏图片，分辨率：1536x2008*/
-						"landscape": "", /*iPad横屏启动图片，分辨率：1024x748*/
-						"landscape-retina": "", /*iPad高分屏横屏启动图片，分辨率：2048x1496*/
-						"portrait7": "", /*iPad iOS7竖屏启动图片，分辨率：768x1024*/
-						"portrait-retina7": "",/*iPad iOS7高分屏竖屏图片，分辨率：1536x2048*/
-						"landscape7": "", /*iPad iOS7横屏启动图片，分辨率：1024x768*/
-						"landscape-retina7": ""
-					}
-				},
 				"android": {
-					"mdpi": "", /*普通屏启动图片，分辨率：240x282*/
-					"ldpi": "", /*大屏启动图片，分辨率：320x442*/
-					"hdpi": "", /*高分屏启动图片，分辨率：480x762*/
-					"xhdpi": "", /*720P高分屏启动图片，分辨率：720x1242*/
+					"hdpi": "",
+					"ldpi": "",
+					"mdpi": "",
+					"xhdpi": "",
 					"xxhdpi": ""
+				},
+				"ios": {
+					"ipad": {
+						"landscape": "",
+						"landscape-retina": "",
+						"landscape-retina7": "",
+						"landscape7": "",
+						"portrait": "",
+						"portrait-retina": "",
+						"portrait-retina7": "",
+						"portrait7": ""
+					},
+					"iphone": {
+						"default": "",
+						"iphonex": "",
+						"iphonexl": "",
+						"retina35": "",
+						"retina40": "",
+						"retina47": "",
+						"retina55": "",
+						"retina55l": ""
+					}
 				}
-			}
+			},
+			"syncDebug": false
+		},
+		"runmode": "liberate",
+		"signature": "Sk9JTiBVUyBtYWlsdG86aHIyMDEzQGRjbG91ZC5pbw==",
+		"splashscreen": {
+			"autoclose": true,
+			"delay": "",
+			"waiting": true
 		}
+	},
+	"version": {
+		"code": "83",
+		"name": "1.0.0"
 	},
 	"dependencies":{
 		"pages": {
+			"components/file_list.html": {
+				"href": "components/file_list.html",
+				"resources": [
+					"css/mui.min.css",
+					"fonts/mui.ttf",
+					"libs/font-awesome/css/font-awesome.min.css",
+					"libs/font-awesome/fonts/fontawesome-webfont.eot",
+					"libs/font-awesome/fonts/fontawesome-webfont.woff2",
+					"libs/font-awesome/fonts/fontawesome-webfont.woff",
+					"libs/font-awesome/fonts/fontawesome-webfont.ttf",
+					"libs/font-awesome/fonts/fontawesome-webfont.svg",
+					"js/rem.js",
+					"js/events.js",
+					"js/mui.min.js",
+					"libs/vue_v2.5.21.js",
+					"libs/hammer.min.v2.0.8.js",
+					"js/File.js",
+					"components/file_list_item.js",
+					"components/file_list.js"
+				],
+				"priority": 0
+			},
+			"components/global_panel.html": {
+				"href": "components/global_panel.html",
+				"resources": [
+					"js/rem.js",
+					"js/events.js",
+					"js/mui.min.js"
+				],
+				"priority": 1
+			},
 			"index.html": {
 				"href": "index.html",
 				"resources": [
-					"js/mui.min.js",
 					"css/mui.min.css",
 					"fonts/mui.ttf",
-					"components/file_list.html"
+					"libs/font-awesome/css/font-awesome.min.css",
+					"libs/font-awesome/fonts/fontawesome-webfont.eot",
+					"libs/font-awesome/fonts/fontawesome-webfont.woff2",
+					"libs/font-awesome/fonts/fontawesome-webfont.woff",
+					"libs/font-awesome/fonts/fontawesome-webfont.ttf",
+					"libs/font-awesome/fonts/fontawesome-webfont.svg",
+					"js/rem.js",
+					"js/events.js",
+					"js/mui.min.js",
+					"index.js"
 				],
-				"priority": 0,
 				"refer": [
+					"components/file_list.html",
 					"components/global_panel.html"
-				]
+				],
+				"priority": 0
 			}
 		},
 		"idle": {
 			"resources": [
+				"test.html",
+				"libs/font-awesome/less/icons.less",
+				"fonts/Arual.ttf",
+				"libs/font-awesome/less/larger.less",
+				"fonts/wqy-zenhei-w.ttf",
+				"libs/font-awesome/less/bordered-pulled.less",
+				"libs/font-awesome/less/font-awesome.less",
+				"libs/font-awesome/scss/_bordered-pulled.scss",
+				"libs/font-awesome/HELP-US-OUT.txt",
+				"libs/font-awesome/less/path.less",
+				"libs/font-awesome/css/font-awesome.css",
+				"libs/font-awesome/scss/_animated.scss",
+				"components/file_list1.js",
+				"libs/font-awesome/scss/_mixins.scss",
+				"libs/font-awesome/less/fixed-width.less",
+				"libs/font-awesome/scss/_stacked.scss",
+				"test.xml",
+				"fonts/wqy-microhei.ttf",
+				"components/file_list_item.vue",
+				"css/common.css",
+				"pages/explorer.html",
+				"fonts/wqy-microhei-w.ttf",
 				"js/mui.js",
-				"css/mui.css"
+				"libs/font-awesome/scss/_fixed-width.scss",
+				"libs/font-awesome/scss/_screen-reader.scss",
+				"pages/editor.html",
+				"libs/font-awesome/less/stacked.less",
+				"libs/font-awesome/fonts/FontAwesome.otf",
+				"libs/font-awesome/scss/_larger.scss",
+				"libs/font-awesome/less/list.less",
+				"libs/font-awesome/scss/_icons.scss",
+				"libs/font-awesome/scss/font-awesome.scss",
+				"css/mui.css",
+				"libs/font-awesome/less/variables.less",
+				"libs/font-awesome/less/mixins.less",
+				"test1.xml",
+				"libs/font-awesome/less/core.less",
+				"libs/font-awesome/less/screen-reader.less",
+				"libs/font-awesome/scss/_list.scss",
+				"libs/font-awesome/scss/_core.scss",
+				"libs/font-awesome/less/animated.less",
+				"libs/font-awesome/less/rotated-flipped.less",
+				"fonts/wqy-zenhei.ttf",
+				"libs/font-awesome/scss/_path.scss",
+				"libs/font-awesome/scss/_rotated-flipped.scss",
+				"libs/font-awesome/scss/_variables.scss"
 			]
 		}
-	}
+	},
+	"unpackage":[
+	  "components/file_list1.js",
+	  "components/file_list_item.vue",
+	  "css/common.css",
+	  "css/mui.css",
+	  "fonts/Arual.ttf",
+	  "fonts/wqy-microhei-w.ttf",
+	  "fonts/wqy-microhei.ttf",
+	  "fonts/wqy-zenhei-w.ttf",
+	  "fonts/wqy-zenhei.ttf",
+	  "js/mui.js",
+	  "libs/font-awesome/css/font-awesome.css",
+	  "libs/font-awesome/less/animated.less",
+	  "libs/font-awesome/less/bordered-pulled.less",
+	  "libs/font-awesome/less/core.less",
+	  "libs/font-awesome/less/fixed-width.less",
+	  "libs/font-awesome/less/font-awesome.less",
+	  "libs/font-awesome/less/icons.less",
+	  "libs/font-awesome/less/larger.less",
+	  "libs/font-awesome/less/list.less",
+	  "libs/font-awesome/less/mixins.less",
+	  "libs/font-awesome/less/path.less",
+	  "libs/font-awesome/less/rotated-flipped.less",
+	  "libs/font-awesome/less/screen-reader.less",
+	  "libs/font-awesome/less/stacked.less",
+	  "libs/font-awesome/less/variables.less",
+	  "libs/font-awesome/scss/_animated.scss",
+	  "libs/font-awesome/scss/_bordered-pulled.scss",
+	  "libs/font-awesome/scss/_core.scss",
+	  "libs/font-awesome/scss/_fixed-width.scss",
+	  "libs/font-awesome/scss/_icons.scss",
+	  "libs/font-awesome/scss/_larger.scss",
+	  "libs/font-awesome/scss/_list.scss",
+	  "libs/font-awesome/scss/_mixins.scss",
+	  "libs/font-awesome/scss/_path.scss",
+	  "libs/font-awesome/scss/_rotated-flipped.scss",
+	  "libs/font-awesome/scss/_screen-reader.scss",
+	  "libs/font-awesome/scss/_stacked.scss",
+	  "libs/font-awesome/scss/_variables.scss",
+	  "libs/font-awesome/scss/font-awesome.scss",
+	  "libs/font-awesome/HELP-US-OUT.txt",
+	  "pages/editor.html",
+	  "pages/explorer.html",
+	  "test.html",
+	  "test.xml",
+	  "test1.xml"
+	]
 }

@@ -1,6 +1,12 @@
 
 var Events = {};
 Object.defineProperties(Events, {
+    new: {
+        enumerable: true,
+        configurable: false,
+        writable: false,
+        value: "new"
+    },
     paste: {
         enumerable: true,
         configurable: false,
