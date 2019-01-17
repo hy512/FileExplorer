@@ -173,12 +173,12 @@ function initVue() {
                 if (!/\/$/.test(path)) {
                     path = path + "/";
                 }
-                console.log(this.list[0].entry.fullPath + "  " + method + "  " +file);
+                console.log(this.list[0].entry.fullPath + "  " + method + "  " + file);
 
                 parent[method](file, { create: true, exclusive: true },
                     function (entry) {
                         mui.toast("创建成功 !");
-                        console.log("创建成功: " +entry.fullPath);
+                        console.log("创建成功: " + entry.fullPath);
                     }, function (error) {
                         mui.toast("创建失败 !");
                         self.onError(error);
@@ -209,6 +209,10 @@ function initVue() {
             // 进入一个目录
             intoDirectory: function (entry) {
                 console.log("into: " + entry.fullPath)
+                if (entry.isFile) {
+                    mui.fire(plus.webview.getLaunchWebview(), Events.open, { uri: "file://" + entry.fullPath });
+                    return;
+                }
                 if (!entry.isDirectory) return;
                 // 清除选中内容
                 this.picks = [];

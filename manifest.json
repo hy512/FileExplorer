@@ -186,11 +186,12 @@
 					"js/rem.js",
 					"js/events.js",
 					"js/mui.min.js",
-					"index.js"
+					"index.js",
+					"components/file_list.html"
 				],
 				"refer": [
-					"components/file_list.html",
-					"components/global_panel.html"
+					"components/global_panel.html",
+					"components/file_options.html"
 				],
 				"priority": 0
 			}

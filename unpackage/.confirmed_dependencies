@@ -12,7 +12,8 @@
     ],
     "refer": [
       "components/file_list.html",
-      "components/global_panel.html"
+      "components/global_panel.html",
+      "components/file_options.html"
     ],
     "priority": 0
   },

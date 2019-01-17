@@ -67,7 +67,7 @@
             }]
         });
         mui.plusReady(function () {
-            var panel = _page.panel = mui.preload({
+            _page.panel = mui.preload({
                 id: "global_panel",
                 url: "./components/global_panel.html",
                 styles: {
@@ -76,11 +76,43 @@
                     zIndex: 999
                 }
             });
+            mui.preload({
+                id: "file_options",
+                url: "./components/file_options.html",
+                styles: {
+                    top: "25%",
+                    background: "transparent",
+                    height: "40%",
+                    left: "55px",
+                    right: "55px"
+                },
+                show: {
+                    autoShow: true,
+                    aniShow: "zoom-out"
+                }
+            });
+
             plus.webview.currentWebview().addEventListener('maskClick', function () {
                 _page.hidePanel();
+                var duration = 200;
+                var options = plus.webview.getWebviewById("file_options");
+                var main = plus.webview.currentWebview();
+                if (options.isVisible()) {
+                    plus.webview.hide(options, "zoom-out", duration);
+                    main.setStyle({
+                        mask: "none",
+                        left: "0",
+                        transition: {
+                            duration: duration
+                        }
+                    });
+                }
             });
+
             // 选中文件的事件
             window.addEventListener(Events.updatepick, _page.onPicks);
+            // 打开文件的事件
+            window.addEventListener(Events.open, _page.onOpen);
             document.body.querySelector("#delete").addEventListener("touchstart", _page.onDelete);
             document.body.querySelector("#cut").addEventListener("touchstart", _page.onCopy);
             document.body.querySelector("#copy").addEventListener("touchstart", _page.onCopy);

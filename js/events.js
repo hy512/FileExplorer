@@ -7,6 +7,18 @@ Object.defineProperties(Events, {
         writable: false,
         value: "new"
     },
+    open: {
+        enumerable: true,
+        configurable: false,
+        writable: false,
+        value: "open" // { uri: string, as?: "text" } uri - 资源的 uri; as - 打开为, 如果缺失显示选项;
+    },
+    fileOptions: {
+        enumerable: true,
+        configurable: false,
+        writable: false,
+        value: "openOptions" // { uri: string } 打开类型选项
+    },
     paste: {
         enumerable: true,
         configurable: false,

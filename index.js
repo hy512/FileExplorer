@@ -200,7 +200,30 @@
         // 发送事件
         mui.fire(plus.webview.getWebviewById("file_list"), Events.paste, { type: page.copies.type, files: page.copies });
     }
-    page.onNew = function() {
+    page.onNew = function () {
         mui.fire(plus.webview.getWebviewById("file_list"), Events.new);
+    }
+    // 打开文件
+    page.onOpen = function (event) {
+        if (!event) return;
+        var uri = event.detail.uri,
+            as = event.detail.as;
+        var options = plus.webview.getWebviewById("file_options");
+        var main = plus.webview.currentWebview();
+        var duration = 200;
+        // 没有指定打开类型
+        // 打开选项
+        if (!as) {
+            if (!options || options.isVisible()) return;
+            plus.webview.show(options, "zoom-out", duration, null, { uri: uri });
+            main.setStyle({
+                mask: 'rgba(0,0,0,0.4)',
+                // left: '40%',
+                transition: {
+                    duration: duration
+                }
+            });
+            return;
+        }
     }
 })(window, document);
