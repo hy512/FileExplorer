@@ -57,6 +57,23 @@
         }
     });
 
+    // 隐藏所有浮现在本窗口上层的窗口
+    page.appear = function () {
+        page.hidePanel();
+        var duration = 200;
+        var options = plus.webview.getWebviewById("file_options");
+        var main = plus.webview.currentWebview();
+        if (options.isVisible()) {
+            plus.webview.hide(options, "zoom-out", duration);
+            main.setStyle({
+                mask: "none",
+                left: "0",
+                transition: {
+                    duration: duration
+                }
+            });
+        }
+    }
     // 侧栏是否显示
     page.isShow = function () {
         return show;
@@ -215,15 +232,26 @@
         // 打开选项
         if (!as) {
             if (!options || options.isVisible()) return;
-            plus.webview.show(options, "zoom-out", duration, null, { uri: uri });
+            plus.webview.show(options, "zoom-out", duration, function () {
+                mui.fire(options, Events.open, { uri: uri });
+            });
             main.setStyle({
                 mask: 'rgba(0,0,0,0.4)',
-                // left: '40%',
                 transition: {
                     duration: duration
                 }
             });
             return;
+        }
+
+        // 指定了打开类型
+        page.appear();
+        switch (as) {
+            case "markdown":
+                var editor = plus.webview.getWebviewById("editor");
+                plus.webview.show(editor);
+                mui.fire(editor, Events.open, { uri: uri });
+                break;
         }
     }
 })(window, document);

@@ -91,23 +91,12 @@
                     aniShow: "zoom-out"
                 }
             });
-
-            plus.webview.currentWebview().addEventListener('maskClick', function () {
-                _page.hidePanel();
-                var duration = 200;
-                var options = plus.webview.getWebviewById("file_options");
-                var main = plus.webview.currentWebview();
-                if (options.isVisible()) {
-                    plus.webview.hide(options, "zoom-out", duration);
-                    main.setStyle({
-                        mask: "none",
-                        left: "0",
-                        transition: {
-                            duration: duration
-                        }
-                    });
-                }
+            mui.preload({
+                id: "editor",
+                uri: "../pages/editor.html"
             });
+
+            plus.webview.currentWebview().addEventListener('maskClick', _page.appear);
 
             // 选中文件的事件
             window.addEventListener(Events.updatepick, _page.onPicks);

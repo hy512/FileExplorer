@@ -11,7 +11,7 @@ Object.defineProperties(Events, {
         enumerable: true,
         configurable: false,
         writable: false,
-        value: "open" // { uri: string, as?: "text" } uri - 资源的 uri; as - 打开为, 如果缺失显示选项;
+        value: "open" // { uri: string, as?: "text" } | { content: string, as?: "text" | "markdown" } uri - 资源的 uri; as - 打开为, 如果缺失显示选项; content - 直接作为内容的字符串
     },
     fileOptions: {
         enumerable: true,
