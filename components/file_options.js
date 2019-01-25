@@ -36,8 +36,8 @@ function initVue() {
                     }
                 },
                 methods: {
-                    openMarkdown: function () {
-                        mui.fire(plus.webview.currentWebview(), Events.open, { uri: this.uri, as: "markdown" });
+                    open: function (event) {
+                        mui.fire(plus.webview.getLaunchWebview(), Events.open, { uri: this.uri, as: event.target.getAttribute("opentype") });
                     }
                 }
             }

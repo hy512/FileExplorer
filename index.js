@@ -248,9 +248,15 @@
         page.appear();
         switch (as) {
             case "markdown":
-                var editor = plus.webview.getWebviewById("editor");
-                plus.webview.show(editor);
-                mui.fire(editor, Events.open, { uri: uri });
+                mui.openWindow({
+                    id: "editor",
+                    url: "./pages/editor.html",
+                    extras: {
+                        uri: uri,
+                        as: as,
+                        content: null
+                    }
+                })
                 break;
         }
     }

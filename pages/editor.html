@@ -1,15 +1,58 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-    <meta charset=utf-8>
-    <meta name=viewport content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Editor</title>
-    <link href=../css/app.7e5d35f45c830e28dc5eaa162bd2adc4.css rel=stylesheet>
+    <link href="../css/mui.min.css" rel="stylesheet" />
 </head>
 
 <body>
-    <div id=app></div>
-    <script src="../js/mui.min.js"></script><script src="../js/events.js"></script> <script type=text/javascript src=../js/manifest.2ae2e69a05c33dfc65f8.js>
-        </script> <script type=text/javascript src=../js/vendor.4de5997bbf590ea8e8cd.js> </script> <script type=text/javascript
-        src=../js/app.d8e9e0184eba7b8ba94c.js> </script> </body> </html>
+
+    <div id="app">
+        <x-editor />
+    </div>
+
+    <script src="../js/events.js"></script>
+    <script src="../js/mui.min.js"></script>
+    <script src="../libs/vue_v2.5.21.js"></script>
+
+    <script src="../js/events.js"></script>
+
+    <script type="text/javascript">
+        mui.init({
+            subpages: [{
+                id: "markdown-editor",
+                url: "../components/editor.html",
+                styles: {
+                    top: "45px",
+                    bottom: "0px"
+                },
+                extras: {
+                    // 传入初始路径, 没有值表示默认路径
+                    path: "/sdcard/"
+                }
+            }]
+        });
+        mui.plusReady(function () {
+            initVue();
+        });
+    </script>
+
+    <!-- <script id="x-editor" type="text/html"> -->
+    <div>
+        <header id="header" class="mui-bar mui-bar-nav">
+            <h1 class="mui-title">{{title}}</h1>
+            <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+            <a class="mui-icon mui-icon-bars mui-pull-right"></a>
+        </header>
+        <div class="mui-content">
+
+        </div>
+    </div>
+    <!-- </script> -->
+</body>
+
+</html>

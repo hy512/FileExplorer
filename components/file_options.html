@@ -32,7 +32,8 @@
         <ul class="mui-table-view">
             <li v-for="(value, key, index) in options"
                 :key="key"
-                @touchstart.prevent="openMarkdown"
+                :opentype="key"
+                @touchstart.prevent="open"
                 class="mui-table-view-cell">{{value}}</li>
         </ul>
     </script>

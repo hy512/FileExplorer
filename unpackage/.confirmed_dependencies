@@ -13,7 +13,8 @@
     "refer": [
       "components/file_list.html",
       "components/global_panel.html",
-      "components/file_options.html"
+      "components/file_options.html",
+      "pages/editor.html"
     ],
     "priority": 0
   },
@@ -43,5 +44,26 @@
     ],
     "refer": [],
     "priority": 0
+  },
+  "components/file_options.html": {
+    "href": "components/file_options.html",
+    "resources": [
+      "css/mui.min.css",
+      "libs/font-awesome/css/font-awesome.min.css",
+      "js/events.js",
+      "js/mui.min.js",
+      "libs/vue_v2.5.21.js",
+      "components/file_options.js"
+    ],
+    "refer": [],
+    "priority": 0
+  },
+  "pages/editor.html": {
+    "resources": [
+      "components/editor.html"
+    ],
+    "refer": [
+      "components/editor.html"
+    ]
   }
 }
