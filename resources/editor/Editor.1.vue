@@ -48,11 +48,11 @@ export default {
         // 获取 mui 传递过来的数据
         mui && mui.plusReady(() => {
             window.addEventListener(Events.open, event => {
-                mui.alert(JSON.stringify(event.detail), "title", "确定", () => {});
-                if (!event.detail)  return;
-                this.text = event.detail.text;
+                if (!event.detail)return;
+                this.content = event.detail.content;
             });
         });
+        
     },
     
     methods: {
@@ -62,11 +62,7 @@ export default {
         },
         onPreview() {
             let preview = !this.preview;
-            if (preview)  {
-                let body = this.$refs.preview.contentDocument.body;
-                body.innerHTML = convert.makeHtml(this.text);
-                body.setAttribute("style", "overflow-wrap: break-word;")
-            }
+            if (preview) this.$refs.preview.contentDocument.body.innerHTML = convert.makeHtml(this.text);
             this.preview = preview;
         }
     },

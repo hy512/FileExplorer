@@ -11,7 +11,7 @@ function initVue() {
                     var webview = plus.webview.currentWebview();
                     // 获取 uri 等信息
                     this.uri = webview.uri;
-                    this.title = /[^/]+$/.exec(uri)[0];
+                    this.title = /[^/]+$/.exec(this.uri)[0];
                     this.content = webview.content;
                     this.scheme = /^[^:]+/.exec(this.uri)[0];
                     // 如果没有传递内容过来，就执行读取任务
@@ -24,7 +24,9 @@ function initVue() {
                                         self.onError(error);
                                         return;
                                     }
+                                    console.log(content)
                                     self.content = content;
+                                    console.log(self._content);
                                 });
                                 break;
                             case "http":
@@ -39,15 +41,30 @@ function initVue() {
                     return {
                         title: "",
                         uri: "",
-                        content: "",
+                        _content: "",
                         scheme: "",
                         renew: false,
                     };
                 },
+                computed: {
+                    content: {
+                        get: function () {
+                            console.log("get " + this._content)
+                            return this._content;
+                        },
+                        set: function (v) {
+                            mui.fire(plus.webview.getWebviewById("markdown-editor"),
+                                Events.open,
+                                { content: this._content = v });
+                        }
+                    }
+                },
                 methods: {
                     // 出错的情况
                     onError: function (error) {
-                        mui.toast([error.name, error.message, error.stack].join(", "));
+                        var errorMsg = [error.name, error.message, error.stack].join(", ");
+                        console.log(errorMsg);
+                        mui.toast(errorMsg);
                     },
                     // 读取 file 协议内容
                     // uri: string - 资源位置
@@ -64,10 +81,16 @@ function initVue() {
                             }
                             entry.file(function (file) {
                                 var reader = new plus.io.FileReader();
-                                // 读取文件成功
-                                reader.onload = function (event) {
+                                // 读取文件操作完成
+                                reader.onloadend = function (event) {
                                     file.close();
                                     var reader = event.target;
+                                    // 判断是否错误
+                                    if (reader.error) {
+                                        callback(reader.error, null);
+                                        return;
+                                    }
+                                    // 判断是否读取完成
                                     if (reader.readyState !== plus.io.FileReader.DONE) {
                                         callback(new Error("文件未读取完成 ! 状态: " + reader.readyState), null);
                                         return;
