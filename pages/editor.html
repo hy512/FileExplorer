@@ -7,10 +7,14 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Editor</title>
     <link href="../css/mui.min.css" rel="stylesheet" />
+    <style type="text/css">
+        .x-disable {
+            color: grey;
+        }
+    </style>
 </head>
 
 <body>
-
     <div id="app">
         <x-editor />
     </div>
@@ -29,24 +33,21 @@
                 styles: {
                     top: "45px",
                     bottom: "0px"
-                },
-                extras: {
-                    // 传入初始路径, 没有值表示默认路径
-                    path: "/sdcard/"
                 }
             }]
         });
         mui.plusReady(function () {
             initVue();
         });
+
     </script>
 
-    <script id="x-editor" type="text/html">
+    <script id="x-editor" type="x-template">
     <div style="width: 100%; height: 100%;">
         <header id="header" class="mui-bar mui-bar-nav">
             <h1 class="mui-title">{{title}}</h1>
             <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
-            <a class="mui-icon mui-icon-bars mui-pull-right"></a>
+            <a @touchstart="onSave" :class="[ 'mui-icon', 'mui-icon-bars', 'mui-pull-right', renew? '': 'x-disable' ]"></a>
         </header>
         <div class="mui-content">
 

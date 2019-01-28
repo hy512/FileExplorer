@@ -13,6 +13,12 @@ Object.defineProperties(Events, {
         writable: false,
         value: "open" // { uri: string, as?: "text" } | { content: string, as?: "text" | "markdown" } uri - 资源的 uri; as - 打开为, 如果缺失显示选项; content - 直接作为内容的字符串
     },
+    renewal: {
+        enumerable: true,
+        configurable: false,
+        writable: false,
+        value: "renewal", // { uri: string, content: string } // 更新的目标和内容
+    },
     fileOptions: {
         enumerable: true,
         configurable: false,

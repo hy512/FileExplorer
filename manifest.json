@@ -218,7 +218,8 @@
 			},
 			"pages/editor.html": {
 				"resources": [
-					"components/editor.html"
+					"components/editor.html",
+					"js/mui.js"
 				],
 				"refer": [],
 				"priority": 0
@@ -239,7 +240,6 @@
 				"resources/editor/TextArea.vue",
 				"test.xml",
 				"css/app.7e5d35f45c830e28dc5eaa162bd2adc4.css.map",
-				"js/mui.js",
 				"libs/font-awesome/scss/_fixed-width.scss",
 				"js/vendor.4de5997bbf590ea8e8cd.js",
 				"css/app.7e5d35f45c830e28dc5eaa162bd2adc4.css",

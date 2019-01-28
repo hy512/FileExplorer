@@ -60,7 +60,8 @@
   },
   "pages/editor.html": {
     "resources": [
-      "components/editor.html"
+      "components/editor.html",
+      "js/mui.js"
     ],
     "refer": [
       "components/editor.html"

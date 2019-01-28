@@ -40,25 +40,34 @@ export default {
     data: function () {
         return {
             text:"",
+            uri: "",
             preview: false,
+            plusReady: false,
         }
     },
     
     mounted() {
         // 获取 mui 传递过来的数据
-        mui && mui.plusReady(() => {
-            window.addEventListener(Events.open, event => {
-                mui.alert(JSON.stringify(event.detail), "title", "确定", () => {});
-                if (!event.detail)  return;
-                this.text = event.detail.text;
-            });
+        window.addEventListener(Events.open, event => {
+            if (!event.detail)  return;
+            this.text = event.detail.content;
+            this.uri = event.detail.uri;
+        });
+        // 标识 plus 对象可用
+        mui && mui.plusReady(()=> {
+            this.plusReady = true;
         });
     },
     
     methods: {
+        // 修改了内容
         input(text) {
-           this.text = text;
-        //    console.log(JSON.stringify(text))
+            this.text = text;
+            // 传递最新文件内容消息
+            if (this.plusReady)
+                mui.fire(plus.webview.getWebviewById("editor"), 
+                    Events.renewal, 
+                    { uri: this.uri, content: this.text });
         },
         onPreview() {
             let preview = !this.preview;

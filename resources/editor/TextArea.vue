@@ -8,7 +8,6 @@
             class="textAreaLine"
         ></div>
         <textarea
-            @input.prevent="layoutResize"
             ref="text"
             class="textAreaText"
             autocomplete="on"
@@ -34,6 +33,12 @@ export default {
         return {
             lineNumber: 0,
         };
+    },
+    watch: {
+        text: function(val, prev) {
+            // console.log(val, prev);
+            this.layoutResize();
+        }
     },
     computed: {
         _text: {
