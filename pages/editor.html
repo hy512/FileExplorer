@@ -7,6 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Editor</title>
     <link href="../css/mui.min.css" rel="stylesheet" />
+    <link href="../libs/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
     <style type="text/css">
         .x-disable {
             color: grey;
@@ -47,7 +48,9 @@
         <header id="header" class="mui-bar mui-bar-nav">
             <h1 class="mui-title">{{title}}</h1>
             <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
-            <a @touchstart="onSave" :class="[ 'mui-icon', 'mui-icon-bars', 'mui-pull-right', renew? '': 'x-disable' ]"></a>
+            <a @touchstart="onSave"
+                :class="[ 'fa', 'fa-save', 'fa-lg', 'mui-pull-right', renew? '': 'x-disable' ]"
+                style="margin-top: 10px;"></a>
         </header>
         <div class="mui-content">
 

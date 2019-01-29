@@ -8,7 +8,7 @@
         <iframe id="preview" ref="preview" v-show="preview">
 
         </iframe>
-        <div v-show="!preview">
+        <div id="edit" v-show="!preview">
             <text-area @xinput="input" :text="text" />
         <!-- <textarea ref="editor"></textarea> -->
         </div>
@@ -57,6 +57,10 @@ export default {
         mui && mui.plusReady(()=> {
             this.plusReady = true;
         });
+
+        // setTimeout(()=> {
+        //     this.text = "123\n\n\n\n21321321321313\n\n\n\n\n\n\n\n\n\n\n\n\n1321321\n\n\n\n\n132213\nend";
+        // }, 1000);
     },
     
     methods: {
@@ -90,7 +94,7 @@ export default {
 #root {
     overflow: hidden;
 }
-#root, #preview {
+#root, #preview, #edit{
   height: 100vh;
   width: 100vw;
 }
@@ -98,5 +102,9 @@ export default {
     overflow: hidden;
     box-sizing: border-box;
     clear: both;
+}
+#edit {
+    width: calc(100vw + 25px);
+    padding-right: 25px;
 }
 </style>

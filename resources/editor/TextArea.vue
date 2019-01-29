@@ -26,6 +26,11 @@ export default {
         this._text = this.text;
     },
     mounted() {
+        let text = this.$refs.text;
+        // console.log(text, text.parentNode)
+        window.text =text;
+        let root = text.parentNode;
+        text.setAttribute("style", "height: " + root.clientHeight + "px");
         this.resizeTextAreaHeight();
         this.insertLineNumber();
     },
@@ -36,8 +41,8 @@ export default {
     },
     watch: {
         text: function(val, prev) {
-            // console.log(val, prev);
-            this.layoutResize();
+            // 延迟重置, 直接设置 textarea 滚动条高度没能及时更新。
+            setTimeout(()=>this.layoutResize(), 0);
         }
     },
     computed: {
@@ -55,6 +60,7 @@ export default {
             // 设置高度
             let text = this.$refs.text;
             text.setAttribute("style", "height: " + text.scrollHeight + "px");
+            // console.log( text.scrollHeight, text.clientHeight)
         },
         layoutResize() {
             this.resizeTextAreaHeight();
